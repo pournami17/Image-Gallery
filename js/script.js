@@ -51,7 +51,7 @@ $(function(){
 	
 	$('.btn-next').on('click', function(){
 		if(currentSlide >= totalSlides) {
-			currentSlide = $('figure:first-child').data('index')
+			currentSlide = $('figure:first-child').data('index') - 1;
 		}
 		currentSlide = currentSlide + 1;
 		var activeElement = $('.album-container').find("[data-index='"+currentSlide+"']");
