@@ -1,0 +1,96 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <title>Image Gallery</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/gallery.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <header>
+      <div class="navbar navbar-dark bg-dark">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand">Image Gallery</a>
+        </div>
+      </div>
+    </header>
+
+    <main role="main">
+    	
+		<section class="jumbotron text-center">
+			<div class="container">
+				<h1 class="jumbotron-heading">Image Gallery</h1>
+			</div>
+		</section>
+
+		<div class="container">
+			<div class="row">
+				<div class="form-group col-sm-4 col-xs-12">
+					<label for="exampleSelect1">Choose Category</label>
+					<select class="form-control" id="chooseCategorySelect">
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="album text-muted">
+			<div class="container">
+				<div class="row album-container"></div>
+			</div>
+		</div>
+
+    </main>
+
+    <footer class="text-muted">
+		<div class="container">
+			<p class="float-right">
+				<a href="#">Back to top</a>
+			</p>
+		</div>
+    </footer>
+
+	<div class="modal fade" id="showItem">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Selected Item</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					
+				</div>
+				<div class="modal-footer">
+
+					<button type="button" class="btn btn-prev btn-primary">Prev</button>
+					<button type="button" class="btn btn-next btn-primary">Next</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

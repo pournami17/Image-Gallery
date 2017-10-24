@@ -1,0 +1,65 @@
+[
+      {
+         "id":1,
+         "title":"Lotus",
+         "imagePath":"images/lotus.jpeg",
+         "desc":"Nelumbo is a genus of aquatic plants with large, showy flowers. Members are commonly called lotus, though lotus is a name also applied to various other plants and plant groups, including the unrelated genus Lotus",
+         "category":"flowers"
+      },
+      {
+         "id":2,
+         "title":"Rose",
+         "imagePath":"images/rose.jpeg",
+         "desc":"A rose is a woody perennial flowering plant of the genus Rosa, in the family Rosaceae, or the flower it bears. There are over a hundred species and thousands of cultivars.",
+         "category":"flowers"
+      },
+      {
+         "id":3,
+         "title":"Sunflower",
+         "imagePath":"images/sunflower.jpeg",
+         "desc":"Helianthus or sunflower L. is a genus of plants comprising about 70 species in the family Asteraceae. The genus is one of many in the Asteraceae that are known as sunflowers.",
+         "category":"flowers"
+      },
+      {
+         "id":4,
+         "title":"Tiger",
+         "imagePath":"images/tiger.jpeg",
+         "desc":"The tiger is the largest cat species, most recognizable for their pattern of dark vertical stripes on reddish-orange fur with a lighter underside. The species is classified in the genus Panthera with the lion, leopard, jaguar, and snow leopard.",
+         "category":"animals"
+      },
+      {
+         "id":5,
+         "title":"Elephant",
+         "imagePath":"images/elephant.jpeg",
+         "desc":"Elephants are large mammals of the family Elephantidae and the order Proboscidea. Three species are currently recognized: the African bush elephant, the African forest elephant, and the Asian elephant",
+         "category":"animals"
+      },
+      {
+         "id":6,
+         "title":"Horse",
+         "imagePath":"images/horse.jpeg",
+         "desc":"The horse is one of two extant subspecies of Equus ferus. It is an odd-toed ungulate mammal belonging to the taxonomic family Equidae.",
+         "category":"animals"
+      },
+      {
+         "id":7,
+         "title":"Parrot",
+         "imagePath":"images/parrot.jpeg",
+         "desc":"Parrots, also known as psittacines, are birds of the roughly 393 species in 92 genera that make up the order Psittaciformes, found in most tropical and subtropical regions",
+         "category":"birds"
+      },
+      {
+         "id":8,
+         "title":"Humming Bird",
+         "imagePath":"images/hummingBird.jpeg",
+         "desc":"Hummingbirds are birds from the Americas that constitute the family Trochilidae. They are among the smallest of birds, most species measuring 7.5–13 cm in length.",
+         "category":"birds"
+      },
+      {
+         "id":9,
+         "title":"Duckling",
+         "imagePath":"images/duckling.jpeg",
+         "desc":"Duck is the common name for a large number of species in the waterfowl family Anatidae, which also includes swans and geese.",
+         "category":"birds"
+      }
+   ]
