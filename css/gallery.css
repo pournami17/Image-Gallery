@@ -66,3 +66,7 @@ footer p {
 #showItem .container .row.active {
   display: flex;
 }
+
+.back-top {
+  cursor: pointer;
+}

@@ -78,6 +78,10 @@ $(function(){
 		showActiveElement(activeElement);
 	});
 
+	$('html').on('click', '.back-top', function() {
+		$('html, body').animate({scrollTop: '0px'}, 500);
+	});
+
 	function showActiveElement(activeElement) {
 		var	imgSrc = activeElement.find('img').attr('src'),
 			imgTitle = activeElement.find('figcaption label').text(),
