@@ -14,6 +14,8 @@ $(function(){
 		    }
 		});
 
+		$('#chooseCategorySelect').append('<option value="All">All</option>')
+
 		$.each(categoryArray, function(i){
 			$('#chooseCategorySelect').append('<option value="' + categoryArray[i] + '">' + categoryArray[i] + '</option>')
 		});
@@ -27,14 +29,23 @@ $(function(){
 		function selectedCategory() {
 			var selectedCategory = $('#chooseCategorySelect').val();
 			$('.album-container').html('');
-			$.each(data, function(i){
-				var albumHolder = "";
-				if(data[i].category === selectedCategory) {
+			if(selectedCategory === "All") {
+				$.each(data, function(i){
+					var albumHolder = "";
 					albumHolder += '<figure class="card" data-index= '+ this.id  +'><img src= "' + this.imagePath + '"><figcaption><label> '+ this.title + '</label><p class="card-text">' + this.desc + '</p></figcaption></figure>';
-		    		$('.album-container').append(albumHolder);
-				}
+			    	$('.album-container').append(albumHolder);
+				});
+			} else {
+				$.each(data, function(i){
+					var albumHolder = "";
+					if(data[i].category === selectedCategory) {
+						albumHolder += '<figure class="card" data-index= '+ this.id  +'><img src= "' + this.imagePath + '"><figcaption><label> '+ this.title + '</label><p class="card-text">' + this.desc + '</p></figcaption></figure>';
+			    		$('.album-container').append(albumHolder);
+					}
 				
-			});
+				});
+			}
+			
 		}
 
 	});
