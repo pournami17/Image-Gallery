@@ -8,7 +8,7 @@ $(function(){
 
 		$.each(data, function(index) {
 		    var availableCategories = data[index].category;
-		    
+		    console.log("data",availableCategories)
 		    if ($.inArray(availableCategories, categoryArray) == -1) {
 		        categoryArray.push(availableCategories);
 		    }
@@ -30,17 +30,25 @@ $(function(){
 			var selectedCategory = $('#chooseCategorySelect').val();
 			$('.album-container').html('');
 			if(selectedCategory === "All") {
-				$.each(data, function(i){
+				$.each(data, function(i , value){
 					var albumHolder = "";
-					albumHolder += '<figure class="card" data-index= '+ this.id  +'><img src= "' + this.imagePath + '"><figcaption><label> '+ this.title + '</label><p class="card-text">' + this.desc + '</p></figcaption></figure>';
-			    	$('.album-container').append(albumHolder);
+					//console.log("value", i);
+					for(var j=0; j<this.items.length; j++) {
+						albumHolder += '<figure class="card" data-index= '+ this.items[j].id  +'><img src= "' + this.items[j].imagePath + '"><figcaption><label> '+ this.items[j].title + '</label><p class="card-text">' + this.items[j].desc + '</p></figcaption></figure>';
+			    	}
+					$('.album-container').append(albumHolder);
+					
 				});
 			} else {
 				$.each(data, function(i){
 					var albumHolder = "";
+					console.log("value", data[i].category);
+					console.log("selectedCategory", selectedCategory);
 					if(data[i].category === selectedCategory) {
-						albumHolder += '<figure class="card" data-index= '+ this.id  +'><img src= "' + this.imagePath + '"><figcaption><label> '+ this.title + '</label><p class="card-text">' + this.desc + '</p></figcaption></figure>';
-			    		$('.album-container').append(albumHolder);
+						for(var j=0; j<this.items.length; j++) {
+							albumHolder += '<figure class="card" data-index= '+ this.items[j].id  +'><img src= "' + this.items[j].imagePath + '"><figcaption><label> '+ this.items[j].title + '</label><p class="card-text">' + this.items[j].desc + '</p></figcaption></figure>';
+			    		}
+						$('.album-container').append(albumHolder);
 					}
 				
 				});
