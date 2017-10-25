@@ -30,11 +30,12 @@ $(function(){
 			var selectedCategory = $('#chooseCategorySelect').val();
 			$('.album-container').html('');
 			if(selectedCategory === "All") {
+				 var k = 1;
 				$.each(data, function(i , value){
 					var albumHolder = "";
-					//console.log("value", i);
 					for(var j=0; j<this.items.length; j++) {
-						albumHolder += '<figure class="card" data-index= '+ this.items[j].id  +'><img src= "' + this.items[j].imagePath + '"><figcaption><label> '+ this.items[j].title + '</label><p class="card-text">' + this.items[j].desc + '</p></figcaption></figure>';
+						albumHolder += '<figure class="card" data-all-id = "'+ k +'" data-category= "'+ this.category + '" data-index= '+ this.items[j].id  +'><img src= "' + this.items[j].imagePath + '"><figcaption><label> '+ this.items[j].title + '</label><p class="card-text">' + this.items[j].desc + '</p></figcaption></figure>';
+			    		k=k+1;
 			    	}
 					$('.album-container').append(albumHolder);
 					
@@ -42,11 +43,9 @@ $(function(){
 			} else {
 				$.each(data, function(i){
 					var albumHolder = "";
-					console.log("value", data[i].category);
-					console.log("selectedCategory", selectedCategory);
 					if(data[i].category === selectedCategory) {
 						for(var j=0; j<this.items.length; j++) {
-							albumHolder += '<figure class="card" data-index= '+ this.items[j].id  +'><img src= "' + this.items[j].imagePath + '"><figcaption><label> '+ this.items[j].title + '</label><p class="card-text">' + this.items[j].desc + '</p></figcaption></figure>';
+							albumHolder += '<figure class="card" data-category= "'+ this.category + '" data-index= '+ this.items[j].id  +'><img src= "' + this.items[j].imagePath + '"><figcaption><label> '+ this.items[j].title + '</label><p class="card-text">' + this.items[j].desc + '</p></figcaption></figure>';
 			    		}
 						$('.album-container').append(albumHolder);
 					}
@@ -60,29 +59,56 @@ $(function(){
 
 	$('body').on('click', '.card', function() {
 		var activeElement = $(this);
+		var activeFilter = $('#chooseCategorySelect').val();
 
-		currentSlide = $(this).data('index');
-		totalSlides = $('figure:last-child').data('index');
+		if(activeFilter === "All") {
+			currentSlide = $(this).data('all-id');
+			totalSlides = $('figure:last-child').data('all-id');
+		}
+		else {
+			currentSlide = $(this).data('index');
+			totalSlides = $('figure:last-child').data('index');
+		}
+		
+
 		showActiveElement(activeElement);
 		$('#showItem').modal('show');
 	});
 
+	$('#showItem').on('hidden.bs.modal', function () {
+		$('.album-container figure').removeClass('active');
+	})
+
 	
 	$('.btn-next').on('click', function(){
+		var activeFilter = $('#chooseCategorySelect').val();
+		var activeElement;
 		if(currentSlide >= totalSlides) {
-			currentSlide = $('figure:first-child').data('index') - 1;
+			currentSlide = 0;
 		}
 		currentSlide = currentSlide + 1;
-		var activeElement = $('.album-container').find("[data-index='"+currentSlide+"']");
+		if(activeFilter === "All") {
+			activeElement = $('.album-container').find("[data-all-id='"+currentSlide+"']");
+		}
+		else {
+			activeElement = $('.album-container').find("[data-index='"+currentSlide+"']");
+		}
 		showActiveElement(activeElement);
 	});
 
 	$('.btn-prev').on('click', function(){
-		if(currentSlide <= ($('figure:first-child').data('index'))) {
+		var activeFilter = $('#chooseCategorySelect').val();
+		var activeElement;
+		if(currentSlide <= 1) {
 			currentSlide = totalSlides + 1;
 		}
 		currentSlide = currentSlide - 1;
-		var activeElement = $('.album-container').find("[data-index='"+currentSlide+"']");
+		if(activeFilter === "All") {
+			activeElement = $('.album-container').find("[data-all-id='"+currentSlide+"']");
+		}
+		else {
+			activeElement = $('.album-container').find("[data-index='"+currentSlide+"']");
+		}
 		showActiveElement(activeElement);
 	});
 
