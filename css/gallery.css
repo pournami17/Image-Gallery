@@ -129,3 +129,15 @@ footer p {
   -ms-transform: translate(0px, 0px);
   transform: translate3d(0px, 0px, 0px);
 }
+
+@media (max-width: 767px) {
+  .card {
+    width: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    width: 100%;
+  }
+}
