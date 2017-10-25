@@ -8,7 +8,6 @@ $(function(){
 
 		$.each(data, function(index) {
 		    var availableCategories = data[index].category;
-		    console.log("data",availableCategories)
 		    if ($.inArray(availableCategories, categoryArray) == -1) {
 		        categoryArray.push(availableCategories);
 		    }
@@ -20,38 +19,37 @@ $(function(){
 			$('#chooseCategorySelect').append('<option value="' + categoryArray[i] + '">' + categoryArray[i] + '</option>')
 		});
 
+		selectedCategory();
+
 		$('#chooseCategorySelect').on('change', function(){
 			selectedCategory();	
 		});
 
-		selectedCategory();
-
 		function selectedCategory() {
-			var selectedCategory = $('#chooseCategorySelect').val();
+			var selectedCategory = $('#chooseCategorySelect').val(),
+				k = 1;
+
 			$('.album-container').html('');
-			if(selectedCategory === "All") {
-				 var k = 1;
-				$.each(data, function(i , value){
-					var albumHolder = "";
-					for(var j=0; j<this.items.length; j++) {
-						albumHolder += '<figure class="card" data-all-id = "'+ k +'" data-category= "'+ this.category + '" data-index= '+ this.items[j].id  +'><img src= "' + this.items[j].imagePath + '"><figcaption><label> '+ this.items[j].title + '</label><p class="card-text">' + this.items[j].desc + '</p></figcaption></figure>';
-			    		k=k+1;
-			    	}
-					$('.album-container').append(albumHolder);
-					
-				});
-			} else {
-				$.each(data, function(i){
-					var albumHolder = "";
-					if(data[i].category === selectedCategory) {
-						for(var j=0; j<this.items.length; j++) {
-							albumHolder += '<figure class="card" data-category= "'+ this.category + '" data-index= '+ this.items[j].id  +'><img src= "' + this.items[j].imagePath + '"><figcaption><label> '+ this.items[j].title + '</label><p class="card-text">' + this.items[j].desc + '</p></figcaption></figure>';
-			    		}
-						$('.album-container').append(albumHolder);
+
+			$.each(data, function(i){
+				var albumHolder = "",
+					totalItems = this.items.length;
+
+					for(var j=0; j<totalItems; j++) {
+						if(selectedCategory === "All") {
+							albumHolder += '<figure class="card" data-all-id = "'+ k +'" data-index= '+ this.items[j].id  +'><img src= "' + this.items[j].imagePath + '"><figcaption><label> '+ this.items[j].title + '</label><p class="card-text">' + this.items[j].desc + '</p></figcaption></figure>';
+							k = k + 1;
+						} else if(data[i].category === selectedCategory) {
+							albumHolder += '<figure class="card" data-index= '+ this.items[j].id  +'><img src= "' + this.items[j].imagePath + '"><figcaption><label> '+ this.items[j].title + '</label><p class="card-text">' + this.items[j].desc + '</p></figcaption></figure>';
+						}
 					}
-				
-				});
-			}
+
+				$('.album-container').append(albumHolder);
+			});
+
+			$('.album-container figure').animate({
+        		opacity: '+=0.6'
+        	}, 400);
 			
 		}
 
@@ -69,54 +67,43 @@ $(function(){
 			currentSlide = $(this).data('index');
 			totalSlides = $('figure:last-child').data('index');
 		}
-		
 
-		showActiveElement(activeElement);
+		showActiveElement(activeElement, activeFilter);
 		$('#showItem').modal('show');
 	});
-
-	$('#showItem').on('hidden.bs.modal', function () {
-		$('.album-container figure').removeClass('active');
-	})
-
 	
-	$('.btn-next').on('click', function(){
-		var activeFilter = $('#chooseCategorySelect').val();
-		var activeElement;
+	$('.btn-next').on('click', function(e){
+		e.preventDefault();
+		var activeFilter = $('#chooseCategorySelect').val(),
+			activeElement;
 		if(currentSlide >= totalSlides) {
 			currentSlide = 0;
 		}
 		currentSlide = currentSlide + 1;
-		if(activeFilter === "All") {
-			activeElement = $('.album-container').find("[data-all-id='"+currentSlide+"']");
-		}
-		else {
-			activeElement = $('.album-container').find("[data-index='"+currentSlide+"']");
-		}
-		showActiveElement(activeElement);
+		
+		showActiveElement(activeElement, activeFilter);
 	});
 
-	$('.btn-prev').on('click', function(){
-		var activeFilter = $('#chooseCategorySelect').val();
-		var activeElement;
+	$('.btn-prev').on('click', function(e){
+		e.preventDefault();
+		var activeFilter = $('#chooseCategorySelect').val(),
+			activeElement;
 		if(currentSlide <= 1) {
 			currentSlide = totalSlides + 1;
 		}
 		currentSlide = currentSlide - 1;
+		
+		showActiveElement(activeElement, activeFilter);
+	});
+
+	function showActiveElement(activeElement, activeFilter) {
+		var activeFilter = $('#chooseCategorySelect').val();
 		if(activeFilter === "All") {
 			activeElement = $('.album-container').find("[data-all-id='"+currentSlide+"']");
 		}
 		else {
 			activeElement = $('.album-container').find("[data-index='"+currentSlide+"']");
 		}
-		showActiveElement(activeElement);
-	});
-
-	$('html').on('click', '.back-top', function() {
-		$('html, body').animate({scrollTop: '0px'}, 500);
-	});
-
-	function showActiveElement(activeElement) {
 		var	imgSrc = activeElement.find('img').attr('src'),
 			imgTitle = activeElement.find('figcaption label').text(),
 			imgDesc = activeElement.find('figcaption .card-text').text(),
@@ -124,7 +111,17 @@ $(function(){
 
 		selectedItemDesc = '<div class="container"><div class="row active"><div class="col selected-item-image"><img class="img-fluid" src=" '+ imgSrc +'" alt="Image"></div><div class="col selected-image-desc"><h3> '+ imgTitle +' </h3><p> '+ imgDesc +'</p></div></div></div>' ;
         $('.modal-body').html('').append(selectedItemDesc);
+        $('.selected-item-image img').effect( "slide", 500 );
+        $('.selected-image-desc h3').effect( "slide", 500 );
+        $('.selected-image-desc p').animate({
+        	left: 0,
+        	opacity: '+=1'
+        }, 500);
 
     }
+
+    $('html').on('click', '.back-top', function() {
+		$('html, body').animate({scrollTop: '0px'}, 500);
+	});
 })
 
