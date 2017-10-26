@@ -136,6 +136,7 @@ footer p {
 
 .carousel-indicators li {
   background: grey;
+  cursor: pointer;
 }
 
 .carousel-indicators li.active {

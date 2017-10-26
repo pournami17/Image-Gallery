@@ -84,36 +84,38 @@ $(function(){
 			totalSlides = $('figure:last-child').data('index');
 		}
 
-		showActiveElement(activeElement, activeFilter);
+		showActiveElement(activeElement, activeFilter, currentSlide, totalSlides);
 		$('#showItem').modal('show');
 	});
 
 	$('.btn-next').on('click', function(e){
 		e.preventDefault();
 		var activeFilter = chooseCategory.val(),
-			activeElement;
+			activeElement,
+			currentSlide = $('.carousel-indicators li.active').index() + 1;
 		if(currentSlide >= totalSlides) {
 			currentSlide = 0;
 		}
 		currentSlide = currentSlide + 1;
 		
-		showActiveElement(activeElement, activeFilter);
+		showActiveElement(activeElement, activeFilter, currentSlide, totalSlides);
 	});
 
 	$('.btn-prev').on('click', function(e){
 		e.preventDefault();
 		var activeFilter = chooseCategory.val(),
-			activeElement;
+			activeElement,
+			currentSlide = $('.carousel-indicators li.active').index() + 1;
 		if(currentSlide <= 1) {
 			currentSlide = totalSlides + 1;
 		}
 		currentSlide = currentSlide - 1;
 		
-		showActiveElement(activeElement, activeFilter);
+		showActiveElement(activeElement, activeFilter, currentSlide, totalSlides);
 	});
 
-	function showActiveElement(activeElement, activeFilter) {
-		
+	function showActiveElement(activeElement, activeFilter, currentSlide, totalSlides) {
+		console.log("currentSlide",currentSlide);
 		if(activeFilter === "All") {
 			activeElement = $('.album-container').find("[data-all-id='"+currentSlide+"']");
 		}
@@ -149,8 +151,19 @@ $(function(){
 
     }
 
+    $('body').on('click', '.carousel-indicators li', function() {
+    	var $this = $(this),
+    		currentSlide = $this.index() + 1,
+    		activeElement,
+    		activeFilter = chooseCategory.val(),
+    		totalSlides = $('.carousel-indicators li:last-child').index() + 1;
+
+    	showActiveElement(activeElement, activeFilter, currentSlide, totalSlides);
+    });
+
     $('html').on('click', '.back-top', function() {
 		$('html, body').animate({scrollTop: '0px'}, 500);
 	});
+	
 })
 
