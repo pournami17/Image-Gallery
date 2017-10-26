@@ -107,10 +107,10 @@ footer p {
 
 .bounce-up {
   opacity: 0;
-  -moz-transition: all 700ms ease-out;
-  -webkit-transition: all 700ms ease-out;
-  -o-transition: all 700ms ease-out;
-  transition: all 700ms ease-out;
+  -moz-transition: all 500ms ease-out;
+  -webkit-transition: all 500ms ease-out;
+  -o-transition: all 500ms ease-out;
+  transition: all 500ms ease-out;
   -moz-transform: translate3d(0px, 200px, 0px);
   -webkit-transform: translate3d(0px, 200px, 0px);
   -o-transform: translate(0px, 200px);
@@ -141,6 +141,22 @@ footer p {
 
 .carousel-indicators li.active {
   background: #000;
+}
+
+@media (min-width: 768px) {
+  .bounce-up:nth-child(3n - 1) {
+    -moz-transition: all 1000ms ease-out;
+    -webkit-transition: all 1000ms ease-out;
+    -o-transition: all 1000ms ease-out;
+    transition: all 1000ms ease-out;
+  }
+
+  .bounce-up:nth-child(3n + 0) {
+    -moz-transition: all 1500ms ease-out;
+    -webkit-transition: all 1500ms ease-out;
+    -o-transition: all 1500ms ease-out;
+    transition: all 1500ms ease-out;
+  }
 }
 
 @media (max-width: 767px) {
