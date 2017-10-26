@@ -2,37 +2,30 @@ $(function(){
 	var jsonURL = "category.json",
 		currentSlide = "",
 		totalSlides = "",
-		$window = $(window);
+		$window = $(window),
+		chooseCategory = $('#chooseCategorySelect');
 
-	var jqxhr = $.getJSON(jsonURL, function(data){
+	$.getJSON(jsonURL, function(data) {
 
-		categoryArray = [];
+		chooseCategory.append('<option value="All">All</option>');
 
 		$.each(data, function(index) {
 		    var availableCategories = data[index].category;
-		    if ($.inArray(availableCategories, categoryArray) == -1) {
-		        categoryArray.push(availableCategories);
-		    }
-		});
-
-		$('#chooseCategorySelect').append('<option value="All">All</option>')
-
-		$.each(categoryArray, function(i){
-			$('#chooseCategorySelect').append('<option value="' + categoryArray[i] + '">' + categoryArray[i] + '</option>')
+		    chooseCategory.append('<option value="' + availableCategories + '">' + availableCategories + '</option>');
 		});
 
 		selectedCategory();
 		$window.on('scroll', checkView);
 		$window.trigger('scroll');
 
-		$('#chooseCategorySelect').on('change', function(){
+		chooseCategory.on('change', function(){
 			selectedCategory();	
 			$window.on('scroll', checkView);
 			$window.trigger('scroll');
 		});
 
 		function selectedCategory() {
-			var selectedCategory = $('#chooseCategorySelect').val(),
+			var selectedCategory = chooseCategory.val(),
 				k = 1;
 
 			$('.album-container').html('');
@@ -80,7 +73,7 @@ $(function(){
 
 	$('body').on('click', '.card', function() {
 		var activeElement = $(this);
-		var activeFilter = $('#chooseCategorySelect').val();
+		var activeFilter = chooseCategory.val();
 
 		if(activeFilter === "All") {
 			currentSlide = $(this).data('all-id');
@@ -97,7 +90,7 @@ $(function(){
 	
 	$('.btn-next').on('click', function(e){
 		e.preventDefault();
-		var activeFilter = $('#chooseCategorySelect').val(),
+		var activeFilter = chooseCategory.val(),
 			activeElement;
 		if(currentSlide >= totalSlides) {
 			currentSlide = 0;
@@ -109,7 +102,7 @@ $(function(){
 
 	$('.btn-prev').on('click', function(e){
 		e.preventDefault();
-		var activeFilter = $('#chooseCategorySelect').val(),
+		var activeFilter = chooseCategory.val(),
 			activeElement;
 		if(currentSlide <= 1) {
 			currentSlide = totalSlides + 1;
@@ -120,7 +113,7 @@ $(function(){
 	});
 
 	function showActiveElement(activeElement, activeFilter) {
-		var activeFilter = $('#chooseCategorySelect').val();
+		var activeFilter = chooseCategory.val();
 		if(activeFilter === "All") {
 			activeElement = $('.album-container').find("[data-all-id='"+currentSlide+"']");
 		}
