@@ -129,6 +129,18 @@ footer p {
   -ms-transform: translate(0px, 0px);
   transform: translate3d(0px, 0px, 0px);
 }
+.carousel-indicators {
+  width: 100%;
+  margin: 0;
+}
+
+.carousel-indicators li {
+  background: grey;
+}
+
+.carousel-indicators li.active {
+  background: #000;
+}
 
 @media (max-width: 767px) {
   .card {
