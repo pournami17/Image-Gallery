@@ -19,8 +19,7 @@ $(function(){
 		$window.trigger('scroll');
 
 		chooseCategory.on('change', function(){
-			selectedCategory();	
-			$window.on('scroll', checkView);
+			selectedCategory();
 			$window.trigger('scroll');
 		});
 
@@ -44,10 +43,10 @@ $(function(){
 					}
 
 				$('.album-container').append(albumHolder);
-				
-			});	
+
+			});
 		}
-		
+
 		function checkView() {
 			var animationElements = $('.album-container figure'),
 				windowHeight = $window.height(),
@@ -97,7 +96,7 @@ $(function(){
 			currentSlide = 0;
 		}
 		currentSlide = currentSlide + 1;
-		
+
 		showActiveElement(activeElement, activeFilter, currentSlide, totalSlides);
 	});
 
@@ -110,7 +109,7 @@ $(function(){
 			currentSlide = totalSlides + 1;
 		}
 		currentSlide = currentSlide - 1;
-		
+
 		showActiveElement(activeElement, activeFilter, currentSlide, totalSlides);
 	});
 
@@ -140,7 +139,7 @@ $(function(){
         }, 500);
 
         carouselIndicators.html('');
-		
+
 		carouselIndicators.each(function() {
 			for(i = 0; i < totalSlides; i++){
 				$("<li/>").appendTo(this);
@@ -164,6 +163,5 @@ $(function(){
     $('html').on('click', '.back-top', function() {
 		$('html, body').animate({scrollTop: '0px'}, 500);
 	});
-	
-})
 
+})
