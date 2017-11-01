@@ -173,9 +173,9 @@ var selectedCategoryData = exports.selectedCategoryData = function selectedCateg
 
         chooseCategory.append('<option value="All">All</option>');
 
-        data.forEach(function (i) {
-            var availableCategories = i.category;
-            chooseCategory.append('<option value="' + availableCategories + '">' + availableCategories + '</option>');
+        data.map(function (categories) {
+            var availableCategories = categories.category;
+            return chooseCategory.append('<option value="' + availableCategories + '">' + availableCategories + '</option>');
         });
 
         var categorySelected = function categorySelected() {
@@ -183,16 +183,36 @@ var selectedCategoryData = exports.selectedCategoryData = function selectedCateg
                 k = 1;
             $('.album-container').html('');
 
-            data.forEach(function (i) {
+            data.map(function (i) {
                 var albumHolder = "",
-                    totalItems = i.items.length;
+                    totalItems = i.items;
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
 
-                for (var j = 0; j < totalItems; j++) {
-                    if (selectedCategory === "All") {
-                        albumHolder += '<figure class="card bounce-up" data-all-id = "' + k + '" data-index= ' + i.items[j].id + '><img src= "' + i.items[j].imagePath + '"><figcaption><label> ' + i.items[j].title + '</label><p class="card-text">' + i.items[j].desc + '</p></figcaption></figure>';
-                        k = k + 1;
-                    } else if (i.category === selectedCategory) {
-                        albumHolder += '<figure class="card bounce-up" data-index= ' + i.items[j].id + '><img src= "' + i.items[j].imagePath + '"><figcaption><label> ' + i.items[j].title + '</label><p class="card-text">' + i.items[j].desc + '</p></figcaption></figure>';
+                try {
+                    for (var _iterator = totalItems[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var j = _step.value;
+
+                        if (selectedCategory === "All") {
+                            albumHolder += '<figure class="card bounce-up" data-all-id = "' + k + '" data-index= ' + j.id + '><img src= "' + j.imagePath + '"><figcaption><label> ' + j.title + '</label><p class="card-text">' + j.desc + '</p></figcaption></figure>';
+                            k += 1;
+                        } else if (i.category === selectedCategory) {
+                            albumHolder += '<figure class="card bounce-up" data-index= ' + j.id + '><img src= "' + j.imagePath + '"><figcaption><label> ' + j.title + '</label><p class="card-text">' + j.desc + '</p></figcaption></figure>';
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
                     }
                 }
 
