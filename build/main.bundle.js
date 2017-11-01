@@ -183,7 +183,7 @@ var selectedCategoryData = exports.selectedCategoryData = function selectedCateg
                 k = 1;
             $('.album-container').html('');
 
-            data.map(function (i) {
+            data.forEach(function (i) {
                 var albumHolder = "",
                     totalItems = i.items;
                 var _iteratorNormalCompletion = true;

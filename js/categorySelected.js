@@ -19,7 +19,7 @@ export let selectedCategoryData = () => {
                 k = 1;
             $('.album-container').html('');
 
-            data.map((i) => {
+            data.forEach((i) => {
                 let albumHolder = "",
                     totalItems = i.items;
                     for (var j of totalItems) {
